@@ -69,13 +69,20 @@ def login_screen():
 # Main loan prediction and recommendation dashboard
 def main_app():
     
-    # Set Groq API client
-    client = Groq(
-        api_key=os.getenv("GROQ_API_KEY"),
-    )
+   # Load Groq API key securely from Streamlit secrets
+if "GROQ_API_KEY" in st.secrets:
+    api_key = st.secrets["GROQ_API_KEY"]
+else:
+    st.error("API key not found! Please set it in Streamlit Secrets.")
+    st.stop()
+
+# Set Groq API client
+client = Groq(
+    api_key=api_key,
+)
 
     
- import requests  # Import requests to fetch files from URLs
+  # Import requests to fetch files from URLs
 
 # Define paths
 model_path = "https://raw.githubusercontent.com/Arnob83/MENG_P/main/Logistic_Regression_model.pkl"
