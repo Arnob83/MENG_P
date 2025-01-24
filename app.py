@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 import matplotlib.pyplot as plt
 import shap
 from shap.maskers import Independent
+import requests
 
 # Load environment variables
 load_dotenv()
@@ -74,30 +75,37 @@ def main_app():
     )
 
     
-    # Load models and data
-    @st.cache_resource
-    def load_model(model_path):
-        with open(model_path, 'rb') as file:
-            return pickle.load(file)
+ import requests  # Import requests to fetch files from URLs
 
-    @st.cache_resource
-    def load_scaler(scaler_path):
-        with open(scaler_path, 'rb') as file:
-            return pickle.load(file)
-    @st.cache_resource
-    def load_masker(Data_path):
-        with open(Data_path, 'rb') as file:
-            return pickle.load(file)
-    
+# Define paths
+model_path = "https://raw.githubusercontent.com/Arnob83/MENG_P/main/Logistic_Regression_model.pkl"
+scaler_path = "https://raw.githubusercontent.com/Arnob83/MENG_P/main/scaler.pkl"
+data_path = "https://raw.githubusercontent.com/Arnob83/MENG_P/main/X_train_scaled.pkl"
 
-    # Paths
-    scaler_path = 'scaler.pkl'
-    model_path = 'Logistic_Regression_model.pkl'
-    Data_path = 'X_train_scaled.pkl'
+# Load models and data from URLs
+@st.cache_resource
+def load_model_from_url(url):
+    response = requests.get(url)
+    response.raise_for_status()  # Raise an error if the request fails
+    return pickle.loads(response.content)
 
-    scaler = load_scaler(scaler_path)
-    model = load_model(model_path)
-    Data = load_model(Data_path )
+@st.cache_resource
+def load_scaler_from_url(url):
+    response = requests.get(url)
+    response.raise_for_status()
+    return pickle.loads(response.content)
+
+@st.cache_resource
+def load_data_from_url(url):
+    response = requests.get(url)
+    response.raise_for_status()
+    return pickle.loads(response.content)
+
+# Load resources
+scaler = load_scaler_from_url(scaler_path)
+model = load_model_from_url(model_path)
+data = load_data_from_url(data_path)
+
 
     # Define feature names in the correct order (as used during model training)
     feature_names = [
