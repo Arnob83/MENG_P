@@ -135,7 +135,7 @@ def login_screen():
 # Main loan prediction and recommendation dashboard
 
     
-   def main_app():
+def main_app():
     # Load Groq API key securely from Streamlit secrets
     if "GROQ_API_KEY" in st.secrets:
         api_key = st.secrets["GROQ_API_KEY"]
