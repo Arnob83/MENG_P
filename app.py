@@ -150,48 +150,48 @@ def main_app():
     # The rest of the code for the main_app() function goes here
 
 
+        
+      # Import requests to fetch files from URLs
     
-  # Import requests to fetch files from URLs
+    # Define paths
+    model_path = "https://raw.githubusercontent.com/Arnob83/MENG_P/main/Logistic_Regression_model.pkl"
+    scaler_path = "https://raw.githubusercontent.com/Arnob83/MENG_P/main/scaler.pkl"
+    data_path = "https://raw.githubusercontent.com/Arnob83/MENG_P/main/X_train_scaled.pkl"
+    
+    # Load models and data from URLs
+    @st.cache_resource
+    def load_model_from_url(url):
+        response = requests.get(url)
+        response.raise_for_status()  # Raise an error if the request fails
+        return pickle.loads(response.content)
+    
+    @st.cache_resource
+    def load_scaler_from_url(url):
+        response = requests.get(url)
+        response.raise_for_status()
+        return pickle.loads(response.content)
+    
+    @st.cache_resource
+    def load_data_from_url(url):
+        response = requests.get(url)
+        response.raise_for_status()
+        return pickle.loads(response.content)
+    
+    # Load resources
+    scaler = load_scaler_from_url(scaler_path)
+    model = load_model_from_url(model_path)
+    data = load_data_from_url(data_path)
 
-# Define paths
-model_path = "https://raw.githubusercontent.com/Arnob83/MENG_P/main/Logistic_Regression_model.pkl"
-scaler_path = "https://raw.githubusercontent.com/Arnob83/MENG_P/main/scaler.pkl"
-data_path = "https://raw.githubusercontent.com/Arnob83/MENG_P/main/X_train_scaled.pkl"
-
-# Load models and data from URLs
-@st.cache_resource
-def load_model_from_url(url):
-    response = requests.get(url)
-    response.raise_for_status()  # Raise an error if the request fails
-    return pickle.loads(response.content)
-
-@st.cache_resource
-def load_scaler_from_url(url):
-    response = requests.get(url)
-    response.raise_for_status()
-    return pickle.loads(response.content)
-
-@st.cache_resource
-def load_data_from_url(url):
-    response = requests.get(url)
-    response.raise_for_status()
-    return pickle.loads(response.content)
-
-# Load resources
-scaler = load_scaler_from_url(scaler_path)
-model = load_model_from_url(model_path)
-data = load_data_from_url(data_path)
-
- feature_names = [
-        'Credit_History', 'Education', 'ApplicantIncome', 
-        'CoapplicantIncome', 'Loan_Amount_Term', 
-        'Property_Area', 'Gender'
-    ]
-
-    # User input
-    st.header("Provide Details for Loan Prediction")
-
-    user_input = {}
+     feature_names = [
+            'Credit_History', 'Education', 'ApplicantIncome', 
+            'CoapplicantIncome', 'Loan_Amount_Term', 
+            'Property_Area', 'Gender'
+        ]
+    
+        # User input
+        st.header("Provide Details for Loan Prediction")
+    
+        user_input = {}
 
     # Customer details
     user_input['Customer_Name'] = st.text_input("Customer Name:")
