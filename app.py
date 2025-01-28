@@ -395,9 +395,7 @@ def admin_app():
         # Display the dataframe with only the relevant columns
         st.dataframe(user_history[columns_to_display])  # Filter only the columns to display
         
-        # Optional: Provide CSV export as well
-        csv = user_history[columns_to_display].to_csv(index=False)
-        st.download_button("Download Report (CSV)", data=csv, file_name="user_requests_history.csv", mime="text/csv")
+        
 
     else:
         st.write("No user requests history available.")
