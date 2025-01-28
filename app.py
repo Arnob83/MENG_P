@@ -188,10 +188,10 @@ def main_app():
             'Property_Area', 'Gender'
         ]
     
-        # User input
-        st.header("Provide Details for Loan Prediction")
+    # User input
+    st.header("Provide Details for Loan Prediction")
     
-        user_input = {}
+    user_input = {}
 
     # Customer details
     user_input['Customer_Name'] = st.text_input("Customer Name:")
