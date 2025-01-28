@@ -4,7 +4,6 @@ import pickle
 from sklearn.preprocessing import StandardScaler
 from groq import Groq
 import os
-from dotenv import load_dotenv
 import shap
 import matplotlib.pyplot as plt
 import sqlite3
