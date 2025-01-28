@@ -182,7 +182,7 @@ def main_app():
     model = load_model_from_url(model_path)
     data = load_data_from_url(data_path)
 
-     feature_names = [
+    feature_names = [
             'Credit_History', 'Education', 'ApplicantIncome', 
             'CoapplicantIncome', 'Loan_Amount_Term', 
             'Property_Area', 'Gender'
