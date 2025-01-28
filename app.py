@@ -133,19 +133,22 @@ def login_screen():
 
 
 # Main loan prediction and recommendation dashboard
-def main_app():
-    
-   # Load Groq API key securely from Streamlit secrets
-if "GROQ_API_KEY" in st.secrets:
-    api_key = st.secrets["GROQ_API_KEY"]
-else:
-    st.error("API key not found! Please set it in Streamlit Secrets.")
-    st.stop()
 
-# Set Groq API client
-client = Groq(
-    api_key=api_key,
-)
+    
+   def main_app():
+    # Load Groq API key securely from Streamlit secrets
+    if "GROQ_API_KEY" in st.secrets:
+        api_key = st.secrets["GROQ_API_KEY"]
+    else:
+        st.error("API key not found! Please set it in Streamlit Secrets.")
+        st.stop()
+
+    # Set Groq API client
+    client = Groq(
+        api_key=api_key,
+    )
+    # The rest of the code for the main_app() function goes here
+
 
     
   # Import requests to fetch files from URLs
