@@ -123,10 +123,12 @@ def login_screen():
             st.session_state["logged_in"] = True
             st.session_state["user_role"] = "user"
             st.success("User login successful!")
+            st.rerun()
         elif username == CREDENTIALS["admin"]["username"] and password == CREDENTIALS["admin"]["password"]:
             st.session_state["logged_in"] = True
             st.session_state["user_role"] = "admin"
             st.success("Admin login successful!")
+            st.rerun()
         else:
             st.error("Invalid username or password.")
 
@@ -415,7 +417,7 @@ def admin_app():
 
 
     st.button("Logout", type='primary', on_click=lambda: st.session_state.update({"logged_in": False}))
-    
+    st.rerun()
     
 
 # Check if user is logged in
