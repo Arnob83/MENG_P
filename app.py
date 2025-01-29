@@ -417,7 +417,7 @@ def admin_app():
 
 
     st.button("Logout", type='primary', on_click=lambda: st.session_state.update({"logged_in": False}))
-    st.rerun()
+    
     
 
 # Check if user is logged in
